@@ -1,120 +1,295 @@
-// src/pages/mentor/CourseDetails.jsx
+// // src/pages/mentor/CourseDetails.jsx
+// import { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
+// import { FaYoutube } from "react-icons/fa";
+
+// import SessionForm from "../../components/SessionForm";
+
+// const CourseDetails = () => {
+//   const { courseId } = useParams(); // 👈 Get course ID from URL
+
+//   const [showForm, setShowForm] = useState(false);
+//   const [sessions, setSessions] = useState([]);
+//   const [course, setCourse] = useState(null);
+
+//   useEffect(() => {
+//     // Simulate fetching course details from API
+//     const fetchCourse = async () => {
+//       // Replace with actual API call
+//       setCourse({
+//         id: courseId,
+//         title: "React Full Course",
+//         thumbnail: "https://via.placeholder.com/600x200?text=Course+Thumbnail",
+//       });
+//     };
+
+//     fetchCourse();
+//   }, [courseId]);
+
+//   const handleAddSession = (newSession) => {
+//     setSessions([...sessions, newSession]);
+//     setShowForm(false);
+//   };
+
+//   return (
+//     <div className="max-w-5xl mx-auto p-4">
+//       {course ? (
+//         <>
+//           {/* Course Header */}
+//           <div className="mb-4">
+//             <img src="/logo.png"alt="Course Thumbnail" className="w-full rounded shadow" />
+//             <h1 className="text-3xl font-bold mt-3">{course.title}</h1>
+//             {/* <p className="text-sm text-gray-500">Course ID: {courseId}</p> */}
+//           </div>
+
+//           {/* Add Session Button */}
+//           {!showForm && (
+//             <button
+//               onClick={() => setShowForm(true)}
+//               className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"
+//             >
+//               + Add Session
+//             </button>
+//           )}
+
+//           {showForm && <SessionForm onSubmit={handleAddSession} />}
+
+//           {/* Session History */}
+//           <div className="mt-8">
+//             <h2 className="text-2xl font-semibold mb-3">Session History</h2>
+//             <table className="min-w-full text-center table-auto border border-gray-300">
+//               <thead>
+//                 <tr className="bg-blue-300">
+//                   <th className="border p-2">S.no</th>
+//                   <th className="border p-2">Title</th>
+//                   <th className="border p-2">Notes (PDF)</th>
+//                   <th className="border p-2">Video</th>
+//                   <th className="border p-2">Live Class Link</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {sessions.map((session, index) => (
+//                   <tr key={index} className="border">
+//                     <td className="p-2 border">{session.lesson}</td>
+//                     <td className="p-2 border">{session.title}</td>
+//                     <td className="p-2 border">
+//                       {session.pdf ? (
+//                         <a href={session.pdf} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+//                           View PDF
+//                         </a>
+//                       ) : (
+//                         "—"
+//                       )}
+//                     </td>
+//                    <td className="p-2 border text-center">
+//   {session.video ? (
+//     <a
+//       href={session.video}
+//       target="_blank"
+//       rel="noreferrer"
+//       className="text-red-600 hover:text-red-700 text-lg inline-flex items-center gap-1"
+//     >
+//       <FaYoutube className="text-2xl" />
+//       <span className="hidden sm:inline">Watch</span>
+//     </a>
+//   ) : (
+//     "—"
+//   )}
+// </td>
+//                     <td className="p-2 border">
+//                       {session.live ? (
+//                         <a href={session.live} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+//                           Join Class
+//                         </a>
+//                       ) : (
+//                         "—"
+//                       )}
+//                     </td>
+//                   </tr>
+//                 ))}
+//                 {sessions.length === 0 && (
+//                   <tr>
+//                     <td colSpan="4" className="text-center p-4 text-gray-500">
+//                       No sessions added yet.
+//                     </td>
+//                   </tr>
+//                 )}
+//               </tbody>
+//             </table>
+//           </div>
+//         </>
+//       ) : (
+//         <p>Loading course details...</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default CourseDetails;
+
+
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { FaYoutube } from "react-icons/fa";
+
+import SessionForm from "../../components/SessionForm";
+import Navbar from "../../components/layout/Navbar";
 
 const CourseDetails = () => {
   const { courseId } = useParams();
+  const [showForm, setShowForm] = useState(false);
+  const [sessions, setSessions] = useState([]);
+  const [course, setCourse] = useState(null);
+  const formRef = useRef();
 
-  const [videoLink, setVideoLink] = useState("");
-  const [youtubeLinks, setYoutubeLinks] = useState([]);
+  useEffect(() => {
+    // Simulate fetching course details from API
+    const fetchCourse = async () => {
+      setCourse({
+        id: courseId,
+        title: "React Full Course",
+        thumbnail: "https://via.placeholder.com/600x200?text=Course+Thumbnail",
+      });
+    };
+    fetchCourse();
+  }, [courseId]);
 
-  const [sessionLink, setSessionLink] = useState("");
-  const [schedule, setSchedule] = useState("");
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (formRef.current && !formRef.current.contains(e.target)) {
+        setShowForm(false);
+      }
+    };
 
-  // Safe YouTube embed parser
-  const getEmbedUrl = (url) => {
-    try {
-      const parsedUrl = new URL(url);
-      const videoId = parsedUrl.searchParams.get("v");
-      return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
-    } catch {
-      return "";
+    if (showForm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  };
 
-  const handleAddVideo = () => {
-    if (videoLink.trim()) {
-      setYoutubeLinks([...youtubeLinks, videoLink.trim()]);
-      setVideoLink("");
-    }
-  };
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showForm]);
 
-  const handleSchedule = () => {
-    if (!sessionLink || !schedule) {
-      alert("Please enter session link and schedule time.");
-      return;
-    }
-    alert(`Session link: ${sessionLink}\nScheduled at: ${new Date(schedule).toLocaleString()}`);
-    setSessionLink("");
-    setSchedule("");
+  const handleAddSession = (newSession) => {
+    setSessions([...sessions, newSession]);
+    setShowForm(false);
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white shadow rounded-xl mt-4">
-      <h2 className="text-xl font-bold mb-4">Manage Course: {courseId}</h2>
+    <>
+    <Navbar />
+    <div className="max-w-5xl mx-auto p-4">
+      {course ? (
+        <>
+          {/* Course Header */}
+          <div className="mb-4">
+            <img
+              src="/logo.png"
+              alt="Course Thumbnail"
+              className="w-full rounded shadow"
+            />
+            <h1 className="text-3xl font-bold mt-3">{course.title}</h1>
+          </div>
 
-      {/* Video Upload Section */}
-      <div className="mb-6">
-        <label className="block mb-2 font-semibold">YouTube Video Link</label>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Enter YouTube video link"
-            value={videoLink}
-            onChange={(e) => setVideoLink(e.target.value)}
-            className="flex-1 border px-3 py-2 rounded"
-          />
-          <button
-            onClick={handleAddVideo}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Add Video
-          </button>
-        </div>
-      </div>
+          {/* Add Session Button */}
+          {!showForm && (
+            <button
+              onClick={() => setShowForm(true)}
+              className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"
+            >
+              + Add Session
+            </button>
+          )}
 
-      {/* Display YouTube Videos */}
-      <div className="mb-8 grid gap-6">
-        {youtubeLinks.length > 0 && (
-          <h3 className="text-lg font-semibold">Uploaded Videos</h3>
-        )}
-        {youtubeLinks.map((link, idx) => {
-          const embedUrl = getEmbedUrl(link);
-          return embedUrl ? (
-            <iframe
-              key={idx}
-              width="100%"
-              height="240"
-              src={embedUrl}
-              title={`YouTube Video ${idx}`}
-              allowFullScreen
-              className="rounded shadow"
-            ></iframe>
-          ) : (
-            <p key={idx} className="text-red-600">
-              Invalid YouTube link: {link}
-            </p>
-          );
-        })}
-      </div>
+          {showForm && (
+            <div ref={formRef}>
+              <SessionForm onSubmit={handleAddSession} />
+            </div>
+          )}
 
-      {/* Live Session (Meet/Jitsi) Scheduler */}
-      <div className="border-t pt-6">
-        <h3 className="font-bold mb-2">Schedule Live Session (Meet/Jitsi)</h3>
-        <label className="block mb-1 font-medium">Session Link</label>
-        <input
-          type="url"
-          placeholder="https://meet.google.com/xyz-abc-def or https://meet.jit.si/your-room"
-          value={sessionLink}
-          onChange={(e) => setSessionLink(e.target.value)}
-          className="w-full border px-3 py-2 mb-2 rounded"
-        />
-        <label className="block mb-1 font-medium">Session Date & Time</label>
-        <input
-          type="datetime-local"
-          value={schedule}
-          onChange={(e) => setSchedule(e.target.value)}
-          className="w-full border px-3 py-2 mb-4 rounded"
-        />
-        <button
-          onClick={handleSchedule}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-        >
-          Schedule Session
-        </button>
-      </div>
+          {/* Session History Table */}
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold mb-3">Session History</h2>
+            <table className="min-w-full text-center table-auto border border-gray-300">
+              <thead>
+                <tr className="bg-blue-300">
+                  <th className="border p-2">Lesson</th>
+                  <th className="border p-2">Title</th>
+                  <th className="border p-2">Notes (PDF)</th>
+                  <th className="border p-2">Video</th>
+                  <th className="border p-2">Live Class Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sessions.map((session, index) => (
+                  <tr key={index} className="border">
+                    <td className="p-2 border">{session.lesson}</td>
+                    <td className="p-2 border">{session.title}</td>
+                    <td className="p-2 border">
+                      {session.pdf ? (
+                        <a
+                          href={session.pdf}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-600 underline"
+                        >
+                          View PDF
+                        </a>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                    <td className="p-2 border">
+                      {session.video ? (
+                        <a
+                          href={session.video}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-red-600 hover:text-red-700 text-lg inline-flex items-center gap-1"
+                        >
+                          <FaYoutube className="text-2xl" />
+                          <span className="hidden sm:inline">Watch</span>
+                        </a>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                    <td className="p-2 border">
+                      {session.live ? (
+                        <a
+                          href={session.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-600 underline"
+                        >
+                          Join Class
+                        </a>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                {sessions.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="text-center p-4 text-gray-500">
+                      No sessions added yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : (
+        <p>Loading course details...</p>
+      )}
     </div>
+    </>
   );
 };
 
 export default CourseDetails;
+

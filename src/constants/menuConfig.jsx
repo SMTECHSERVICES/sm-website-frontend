@@ -15,7 +15,8 @@ const menuByRole = {
   ],
   student: [
     { label: "Student Dashboard", path: "/student/dashboard" },
-    { label: "Join Training", path: "/training/join" },
+    { label: "Join Training", path: "/student/allcourse" },
+    {label:"my courses",path:"/student/mycourses"},
     { label: "Certificates", path: "/student/certificates" },
   ],
   candidate: [

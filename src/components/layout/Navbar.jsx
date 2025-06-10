@@ -130,7 +130,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <button onClick={handleLogout} className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Logout</button>
             ) : (
-              <Link to="/login" className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Login</Link>
+              null
             )}
           </div>
         ) : (
