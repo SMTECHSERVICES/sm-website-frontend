@@ -3,11 +3,11 @@ const leaders = [
   {
     name: "Er. Abhishek Mishra",
     title: "Founder & CEO",
-    image: "/founder.jpg",
+    image: "/founder.jpeg",
     bio: "Visionary leader driving employment and entrepreneurship across India.",
   },
   {
-    name: "Expert 1",
+    name: "Er.Ankita Upadhayay",
     title: "Training Head",
     image: "/expert1.jpg",
     bio: "Oversees mentor sessions and certified training programs.",
