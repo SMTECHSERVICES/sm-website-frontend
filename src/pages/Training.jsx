@@ -281,6 +281,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
 
 const Training = () => {
   const [activeTab, setActiveTab] = useState('student');
@@ -645,64 +647,8 @@ const Training = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <div className="h-8 w-8 rounded-full bg-blue-600"></div>
-                <span className="ml-2 text-xl font-bold text-gray-800">CodeMaster</span>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <a href="#" className="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Home
-                </a>
-                <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Courses
-                </a>
-                <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Mentors
-                </a>
-                <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  About
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center">
-              {isLoggedIn ? (
-                <div className="flex items-center">
-                  <span className="text-gray-600 mr-4 hidden md:block">Hi, {userName}</span>
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold">
-                    {userName.charAt(0).toUpperCase()}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex space-x-2">
-                  <button 
-                    onClick={() => {
-                      setActiveTab('student');
-                      setIsLogin(true);
-                    }}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium"
-                  >
-                    Student Login
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setActiveTab('mentor');
-                      setIsLogin(true);
-                    }}
-                    className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium"
-                  >
-                    Mentor Login
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      
+       <Navbar/>
       {/* Hero Section */}
       <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -716,15 +662,7 @@ const Training = () => {
         </div>
       </header>
 
-      {/* Authentication Section */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center">
-            {isLoggedIn ? 'Your Dashboard' : 'Join Our Learning Community'}
-          </h2>
-          {isLoggedIn ? renderDashboard() : renderAuthForm()}
-        </div>
-      </section>
+      
 
       {/* Video Demo Section */}
       <section className="py-16 bg-gray-50">
@@ -738,7 +676,7 @@ const Training = () => {
           
           <div className="aspect-w-16 aspect-h-9 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
             <iframe 
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              src="https://www.youtube.com/embed/QpITYdFqMmU?si=C8nspmt0CvA874f9" 
               title="Training Preview"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -853,6 +791,15 @@ const Training = () => {
           </div>
         </div>
       </section>
+      {/* Authentication Section */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center">
+            {isLoggedIn ? 'Your Dashboard' : 'Join Our Learning Community'}
+          </h2>
+          {isLoggedIn ? renderDashboard() : renderAuthForm()}
+        </div>
+      </section>
 
       {/* Testimonials */}
       <section className="py-16 bg-white">
@@ -877,7 +824,7 @@ const Training = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
+      {/* <footer className="bg-gray-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-lg mb-4">Ready to transform your career?</p>
           <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
@@ -887,7 +834,8 @@ const Training = () => {
             <p>© 2023 CodeMaster Trainings. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
+      <Footer/>
     </div>
   );
 };
