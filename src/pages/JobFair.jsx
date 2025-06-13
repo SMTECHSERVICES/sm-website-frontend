@@ -92,7 +92,7 @@ const JobFair = () => {
 
   // Dummy data for past event gallery images
   const pastEvents = [
-    { id: 1, src: 'https://placehold.co/600x400/FFD700/000000?text=Event+1', alt: 'Past Event 1' },
+    { id: 1, src: '/Event 1.jpg', alt: 'Past Event 1' },
     { id: 2, src: 'https://placehold.co/600x400/87CEEB/000000?text=Event+2', alt: 'Past Event 2' },
     { id: 3, src: 'https://placehold.co/600x400/98FB98/000000?text=Event+3', alt: 'Past Event 3' },
     { id: 4, src: 'https://placehold.co/600x400/F08080/000000?text=Event+4', alt: 'Past Event 4' },

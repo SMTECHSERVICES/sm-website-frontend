@@ -7,9 +7,9 @@ const leaders = [
     bio: "Visionary leader driving employment and entrepreneurship across India.",
   },
   {
-    name: "Er.Ankita Upadhayay",
+    name: "Mr.Vivek Sharma",
     title: "Training Head",
-    image: "/expert1.jpg",
+    image: "/expert1.png",
     bio: "Oversees mentor sessions and certified training programs.",
   },
   {
@@ -19,7 +19,7 @@ const leaders = [
     bio: "Coordinates job fairs and corporate hiring drives.",
   },
   {
-    name: "Expert 3",
+    name: "Mr.Sagar Bhardwaj",
     title: "Payroll & Software Consultant",
     image: "/expert3.jpg",
     bio: "Provides payroll system and business software advisory.",
