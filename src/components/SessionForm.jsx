@@ -1,34 +1,55 @@
 // src/components/SessionForm.jsx
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import UploadBox from "../components/ui/UploadBox";
+import { server } from "../constants/api";
+import axios from "axios";
 
 const SessionForm = ({ onSubmit }) => {
+  const {id} = useParams();
   const [lesson, setLesson] = useState("");
   const [title, setTitle] = useState("");
   const [pdf, setPdf] = useState(null);
   const [video, setVideo] = useState("");
   const [live, setLive] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    let pdfUrl = pdf ? URL.createObjectURL(pdf) : null;
+  try {
+    const formData = new FormData();
+    formData.append("lesson", lesson);
+    formData.append("title", title);
+    formData.append("pdf", pdf);
+    formData.append("video", video);
+    formData.append("live", live);
 
-    onSubmit({
-        lesson:lesson,
-      title: title,
-      pdf: pdfUrl,
-      video,
-      live,
-    });
+    const response = await axios.post(
+      `${server}/mentor/create-session/${id}`,
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
-    // Reset form
+    if (response?.data?.lesson) {
+      onSubmit(response.data.lesson); // ✅ update in parent
+    }
+
+    // Clear form
     setLesson("");
     setTitle("");
     setPdf(null);
     setVideo("");
     setLive("");
-  };
+  } catch (error) {
+    console.error("Error creating session:", error);
+    alert("Failed to create session.");
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="mt-4 bg-gray-100 p-4 rounded shadow space-y-4">
