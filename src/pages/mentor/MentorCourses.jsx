@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { server } from '../../constants/api';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/layout/Navbar';
+import Footer from '../../components/layout/Footer'
 
 const MyCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -29,6 +31,8 @@ const MyCourses = () => {
   if (loading) return <p className="text-center mt-10">Loading courses...</p>;
 
   return (
+   <>
+   <Navbar />
     <div className="max-w-6xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4 text-blue-700">My Courses</h2>
 
@@ -66,6 +70,8 @@ const MyCourses = () => {
         </div>
       )}
     </div>
+  <Footer />
+    </>
   );
 };
 

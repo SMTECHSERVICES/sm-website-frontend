@@ -33,6 +33,42 @@ const CourseSection = () => {
         };
         getData();
       }, []);
+
+     const handleEnrollClick = async (courseId) => {
+  try {
+    const response = await axios.post(
+      `${server}/student/enroll/${courseId}`,
+      {}, // Empty body if not needed
+      { withCredentials: true } // Include credentials/cookies
+    );
+    
+    if (response.status === 200 || response.status === 201) {
+      navigate(`/student/mycourses/${courseId}`);
+    }
+  } catch (error) {
+    if (error?.response) {
+      switch (error?.response?.status) {
+        case 401:
+          alert('Please login to enroll in courses');
+          // Optionally redirect to login
+          // navigate('/login');
+          break;
+        case 400:
+          alert('You are already enrolled in this course');
+          navigate(`/student/mycourses/${courseId}`);
+          break;
+        case 404:
+          alert('Course not found');
+          break;
+        default:
+          alert('Enrollment failed. Please try again later.');
+      }
+    } else {
+      console.error('Enrollment error:', error);
+      alert('Network error. Please check your connection.');
+    }
+  }
+};
     
       const categories = [
         { id: 'all', name: 'All Courses' },
@@ -176,7 +212,7 @@ const CourseSection = () => {
                       <button onClick={() => navigate(`/student/allcourse/${course._id}`)} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         View Details
                       </button>
-                      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                      <button onClick={()=>handleEnrollClick(course._id)} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                         Enroll Now
                       </button>
                     </div>

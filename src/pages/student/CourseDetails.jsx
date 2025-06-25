@@ -103,13 +103,14 @@
 
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { server } from "../../constants/api";
 import axios from "axios";
 import Navbar from "../../components/layout/Navbar";
 import { FaClock, FaTag, FaMoneyBillWave, FaDownload } from "react-icons/fa";
 
 const CourseDetails = () => {
+  const navigate= useNavigate()
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -132,6 +133,42 @@ const CourseDetails = () => {
 
     fetchDetails();
   }, [courseId]);
+
+  const handleEnroll = async () => {
+    try {
+      const response = await axios.post(
+        `${server}/student/enroll/${courseId}`,
+        {}, // Empty body if not needed
+        { withCredentials: true } // Include credentials/cookies
+      );
+      
+      if (response.status === 200 || response.status === 201) {
+        navigate(`/student/mycourses/${courseId}`);
+      }
+    } catch (error) {
+      if (error?.response) {
+        switch (error?.response?.status) {
+          case 401:
+            alert('Please login to enroll in courses');
+            // Optionally redirect to login
+            // navigate('/login');
+            break;
+          case 400:
+            alert('You are already enrolled in this course');
+            navigate(`/student/mycourses/${courseId}`);
+            break;
+          case 404:
+            alert('Course not found');
+            break;
+          default:
+            alert('Enrollment failed. Please try again later.');
+        }
+      } else {
+        console.error('Enrollment error:', error);
+        alert('Network error. Please check your connection.');
+      }
+    }
+  };
 
   // Format skills string into array
   const formatSkills = (skills) => {
@@ -208,7 +245,7 @@ const CourseDetails = () => {
                     </div>
                   </div>
                   
-                  <button className="w-full bg-gradient-to-r cursor-pointer from-green-500 to-emerald-600 text-white text-lg font-semibold py-3 rounded-lg shadow-md hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-0.5">
+                  <button onClick={handleEnroll} className="w-full bg-gradient-to-r cursor-pointer from-green-500 to-emerald-600 text-white text-lg font-semibold py-3 rounded-lg shadow-md hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-0.5">
                     Enroll Now
                   </button>
                 </div>
