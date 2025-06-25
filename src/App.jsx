@@ -44,7 +44,7 @@ const EnrolledCourseDetailPage = lazy(()=>import('./pages/student/EnrolledCourse
 const AdminLoginPage = lazy(()=>import('./pages/admin/AdminLogin.jsx'))
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>

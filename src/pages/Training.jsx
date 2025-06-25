@@ -1,8 +1,4 @@
 
-
-
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -10,6 +6,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { server } from '../constants/api';
 import axios from 'axios'
+import CourseSection from '../components/layout/CourseSection';
 
 const Training = () => {
   const [activeTab, setActiveTab] = useState('student');
@@ -461,115 +458,7 @@ const handleSubmit = async (e) => {
       
        <Navbar/>
       {/* Hero Section */}
-      <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Professional Training Programs</h1>
-          <p className="text-xl max-w-3xl mx-auto">
-            Industry-relevant courses taught by experts with real-world projects and placement support
-          </p>
-          <button className="mt-8 bg-white text-blue-600 font-semibold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300">
-            Explore Courses
-          </button>
-        </div>
-      </header>
-
-      
-
-      {/* Video Demo Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">See Our Training in Action</h2>
-            <p className="text-xl text-gray-600">
-              Watch how our expert-led training helps students build real-world skills
-            </p>
-          </div>
-          
-          <div className="aspect-w-16 aspect-h-9 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
-            <iframe 
-              src="https://www.youtube.com/embed/QpITYdFqMmU?si=C8nspmt0CvA874f9" 
-              title="Training Preview"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Browse by Category</h2>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Course Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map(course => (
-              <div key={course.id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">
-                        {course.duration}
-                      </span>
-                      <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-                        {course.level}
-                      </span>
-                    </div>
-                    <span className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-                  
-                  <div className="mb-6">
-                    <div className="flex items-center mb-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                        <span className="text-xs text-blue-800 font-bold">M</span>
-                      </div>
-                      <span className="text-sm text-gray-700">Mentor: {course.mentor}</span>
-                    </div>
-                    
-                    {course.features.map((feature, index) => (
-                      <div key={index} className="flex items-center mb-2">
-                        <svg className="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500">
-                      <span className="font-medium">{course.enrolled}</span> students enrolled
-                    </div>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                      Enroll Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <CourseSection />
 
       {/* Features Section */}
       <section className="py-16 bg-gray-100">
