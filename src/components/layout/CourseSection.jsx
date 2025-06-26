@@ -104,17 +104,6 @@ const CourseSection = () => {
        <div className="min-h-screen bg-gray-50">
 
         {/* Hero Section */}
-        <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Professional Training Programs</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Industry-relevant courses taught by experts with real-world projects and placement support
-            </p>
-            <button className="mt-8 bg-white text-blue-600 font-semibold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300">
-              Explore Courses
-            </button>
-          </div>
-        </header>
 
         {/* Video Demo Section */}
         <section className="py-16 bg-white">

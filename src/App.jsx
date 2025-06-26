@@ -9,11 +9,12 @@ const AboutPage = lazy(()=>import('./pages/About'));
 const ContactPage = lazy(()=>import('./pages/Contact'));
 const ServicesPage = lazy(()=>import('./pages/Services'));
 const TrainingPage = lazy(()=>import('./pages/Training.jsx'));
-const JobPortalLoginPage = lazy(()=>import('./pages/JobPortalLogin.jsx'));
+const JobPortalPage = lazy(()=>import('./pages/JobPortal.jsx'));
+const JobPortalLogin = lazy(()=>import('./components/layout/JobPortalLogin.jsx'))
 const JobFairPage = lazy(()=>import('./pages/JobFair.jsx'));
 const PayrollPage = lazy(()=>import('./pages/Payroll.jsx'));
 const SoftwareDevPage = lazy(()=>import('./pages/SoftwareDev.jsx'));
-const LoginPage = lazy(()=>import('./pages/AuthPage'));
+//const LoginPage = lazy(()=>import('./pages/AuthPage'));
 const EmployerDashboardPage = lazy(()=>import('./pages/dashboard/EmployerDashboard'));
 const CandidateDashboardPage = lazy(()=>import('./pages/dashboard/CandidateDashboard'));
 const MentorDashboardPage = lazy(()=>import('./pages/dashboard/MentorDashboard'));
@@ -24,7 +25,9 @@ const PostJobPage = lazy(()=>import('./pages/employer/PostJob'));
 const ManageJobsPage = lazy(()=>import('./pages/employer/ManageJobs'));
 const EditJobPage = lazy(()=>import('./pages/employer/EditJob'));
 const ApplicationPage = lazy(()=>import('./pages/employer/Applications.jsx'));
-const ApplicationDetailPage = lazy(()=>import('./pages/employer/ApplicationDetail.jsx'))
+const EmployerAuthPage = lazy(()=>import('./pages/employer/EmployerAuthPage.jsx'));
+const ApplicationDetailPage = lazy(()=>import('./pages/employer/ApplicationDetail.jsx'));
+const CandidateAuthPage = lazy(()=>import('./pages/candidate/JobSeekerAuthPage.jsx'))
 const CandidateJobsPage = lazy(()=>import('./pages/candidate/Jobs.jsx'));
 const CandidateJobDetailPage = lazy(()=>import('./pages/candidate/JobDetails.jsx'));
 const ApplyJobPage = lazy(()=>import('./pages/candidate/ApplyJob.jsx'));
@@ -35,11 +38,14 @@ const CandidateProfilePage = lazy(()=>import('./pages/candidate/CandidateProfile
 const CreateCoursePage = lazy(()=>import('./pages/mentor/CreateCourse.jsx'));
 const MentorCoursesPage = lazy(()=>import('./pages/mentor/MentorCourses.jsx'))
 const MentorCourseDetailsPage = lazy(()=>import('./pages/mentor/CourseDetails.jsx'));
+const MentorAuthPage = lazy(()=>import('./pages/mentor/MentorAuthPage.jsx'));
+
 
 const ShowAllCoursesPage = lazy(()=>import('./pages/student/ShowAllCourses.jsx'));
 const ShowCourseDetails = lazy(()=>import('./pages/student/CourseDetails.jsx'));
 const EnrolledCourses = lazy(()=>import('./pages/student/EnrolledCourses'));
 const EnrolledCourseDetailPage = lazy(()=>import('./pages/student/EnrolledCourseDetail.jsx'));
+const StudentAuthPage = lazy(()=>import('./pages/student/StudentAuthPage.jsx'))
 
 const AdminLoginPage = lazy(()=>import('./pages/admin/AdminLogin.jsx'))
 
@@ -57,15 +63,17 @@ function App() {
     <Route path='/services' element={<ServicesPage />} />
     <Route path='/contact' element={<ContactPage />} />
     <Route path='/training' element={<TrainingPage />}/>
-    <Route path='/job-placement' element={<JobPortalLoginPage />}/>
+    <Route path='/job-placement' element={<JobPortalPage />}/>
     <Route path='/job-fair' element={<JobFairPage />}/>
      <Route path='/payroll' element={<PayrollPage />}/>
       <Route path='/software' element={<SoftwareDevPage />}/>
+      <Route path='/job-portal-Login' element={<JobPortalLogin />} />
      
-     <Route path='/login' element={<LoginPage />} />
+     {/* <Route path='/login' element={<LoginPage />} /> */}
      
      {/* EMPLOYER PATHS */}
 
+      <Route path='/employer/auth' element={<EmployerAuthPage />} />
      <Route path='/employer/Dashboard' element={<EmployerDashboardPage />} />
      <Route path='/employer/post-job' element={<PostJobPage />} />
      <Route path='/employer/manage-jobs' element={<ManageJobsPage />} />
@@ -74,6 +82,7 @@ function App() {
      <Route path='/employer/manage-jobs/:id' element={<EditJobPage />} />
 
      {/* MENTOR PATHS */}
+     <Route path='/mentor/auth' element={<MentorAuthPage />} />
      <Route path='/mentor/dashboard' element={<MentorDashboardPage />} />
      <Route path='/mentor/create-course' element={<CreateCoursePage />}  />
      <Route path='/mentor/courses' element={<MentorCoursesPage />}  />
@@ -83,6 +92,7 @@ function App() {
     
 
      {/* CANDIDATE PATHS */}
+      <Route path='/candidate/auth' element={<CandidateAuthPage />} />
      <Route path='/candidate/dashboard' element={<CandidateDashboardPage />} />
      <Route path='/candidate/profile' element={<CandidateProfilePage />} />
      <Route path='/candidate/jobs' element={<CandidateJobsPage />} />
@@ -93,7 +103,7 @@ function App() {
      <Route path='/candidate/apply/:id' element={<ApplyJobPage />} />
 
      {/* STUDENT PATHS */}
-      
+      <Route path='/student/auth' element={<StudentAuthPage />} />
        <Route path='/student/dashboard' element={<StudentDashboardPage />} />
        <Route path='/student/mycourses' element={<EnrolledCourses />} />
         <Route path='/student/allcourse' element={<ShowAllCoursesPage />} />

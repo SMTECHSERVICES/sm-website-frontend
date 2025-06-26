@@ -187,22 +187,22 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       // Make logout request to server
-      const response = await axios.post(
-        `${server}/${userRole}/logout`,
-        {}, 
-        { withCredentials: true }
-      );
+      // const response = await axios.post(
+      //   `${server}/${userRole}/logout`,
+      //   {}, 
+      //   { withCredentials: true }
+      // );
       
       // Handle successful logout
       logout();
       navigate("/");
       
       // Show success message
-      alert(response.data?.message || "Logged out successfully");
+      //alert(response.data?.message || "Logged out successfully");
       
     } catch (error) {
       console.error("Logout error:", error);
-      alert(error.response?.data?.message || "Logout failed. Please try again.");
+      //alert(error.response?.data?.message || "Logout failed. Please try again.");
     }
   };
 

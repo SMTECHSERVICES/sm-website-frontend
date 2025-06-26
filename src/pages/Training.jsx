@@ -7,6 +7,8 @@ import Footer from '../components/layout/Footer';
 import { server } from '../constants/api';
 import axios from 'axios'
 import CourseSection from '../components/layout/CourseSection';
+import LoginCommonLayout from '../components/layout/LoginCommonLayout';
+import hero from '/homebanner.jpg'
 
 const Training = () => {
   const [activeTab, setActiveTab] = useState('student');
@@ -40,44 +42,6 @@ const Training = () => {
 
 
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-
-//   if (isLogin) {
-//     const userData = {
-//       isAuthenticated: true,
-//       user: {
-//         name: formData.name,
-//         email: formData.email,
-//         role: activeTab,
-//       },
-//       token: "fake-token",
-//     };
-
-//     login(userData);
-//     alert(`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} login successful!`);
-//     navigate(`/${activeTab}/dashboard`);
-//   } else {
-//     if (formData.password !== formData.confirmPassword) {
-//       alert("Passwords don't match!");
-//       return;
-//     }
-
-//     const userData = {
-//       isAuthenticated: true,
-//       user: {
-//         name: formData.name ,
-//         email: formData.email,
-//         role: activeTab,
-//       },
-//       token: "fake-token",
-//     };
-
-//     login(userData); // Save to context + localStorage
-//     alert(`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} registered successfully!`);
-//     navigate(`/${activeTab}/dashboard`);
-//   }
-// };
 
 
 const handleSubmit = async (e) => {
@@ -451,15 +415,18 @@ const handleSubmit = async (e) => {
       )}
     </div>
   );
-
+   
+  const heading = 'Professional Training Programs'
+  const paragraph = 'Industry-relevant courses taught by experts with real-world projects and placement support'
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       
        <Navbar/>
       {/* Hero Section */}
-  <CourseSection />
-
+  {/* <CourseSection /> */}
+  <LoginCommonLayout login1={'Student'} login2={'mentor'} heading={heading} paragraph={paragraph} to1={'/student/auth'} to2={'/mentor/auth'} hero={hero}  />
+    <CourseSection />
       {/* Features Section */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

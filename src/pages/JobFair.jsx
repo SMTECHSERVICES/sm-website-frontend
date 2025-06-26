@@ -1,6 +1,9 @@
 import React ,{useState}from 'react'
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import LoginCommonLayout from '../components/layout/LoginCommonLayout';
+ import jobFair from '/job-fair.jpg'
+
 
 const JobFair = () => {
      const [activeTab, setActiveTab] = useState('employer'); // State for registration tabs
@@ -98,23 +101,29 @@ const JobFair = () => {
     { id: 4, src: 'https://placehold.co/600x400/F08080/000000?text=Event+4', alt: 'Past Event 4' },
     { id: 5, src: 'https://placehold.co/600x400/DDA0DD/000000?text=Event+5', alt: 'Past Event 5' },
   ];
+
+  const heading = 'Real Jobs. Real Connections. Real Impact.';
+  const paragraph = 'Meet top employers, explore real job openings, and build meaningful career connections — all in one powerful event.'
   return (
    <>
    <Navbar />
+
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-inter text-gray-800">
-      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      
 
         {/* Header */}
-        <header className="text-center py-8 sm:py-12 bg-white shadow-lg rounded-xl mb-10">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-indigo-700 leading-tight">
+       
+          {/* <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-indigo-700 leading-tight">
             Job Fair Connect
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Connecting Talent with Opportunity Across Colleges, Political Zones, and Corporate Parks.
-          </p>
-        </header>
+          </p> */}
+          <LoginCommonLayout login1={'Career Explorer'} login2={'Talent Seeker'} heading={heading} paragraph={paragraph} to1={'/about'} to2={'/job-placement'} hero={jobFair} />
+     
 
         {/* Upcoming Job Fairs Section */}
+        <div className="container mx-auto p-4 sm:p-6 lg:p-8">
         <section className="mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-indigo-800 mb-8">Upcoming Job Fairs</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

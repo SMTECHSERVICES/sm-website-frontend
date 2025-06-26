@@ -73,7 +73,7 @@ const SoftwareDev = () => {
             />
           </div>
           <p className="text-gray-700 leading-relaxed text-md sm:text-lg mb-4">
-            At **[Your Company Name]**, we specialize in crafting bespoke software solutions that drive innovation and efficiency for businesses of all sizes. With a passionate team of experienced developers, designers, and project managers, we transform complex challenges into intuitive and powerful digital experiences.
+            At <span className='text-2xl font-semibold text-[#3451F7]'>SM SERVICES</span>, we specialize in crafting bespoke software solutions that drive innovation and efficiency for businesses of all sizes. With a passionate team of experienced developers, designers, and project managers, we transform complex challenges into intuitive and powerful digital experiences.
           </p>
           <p className="text-gray-700 leading-relaxed text-md sm:text-lg">
             Our approach is client-centric, focusing on deep understanding of your business needs, agile development methodologies, and transparent communication. We are committed to delivering high-quality, scalable, and secure software that perfectly aligns with your strategic objectives and helps you achieve sustainable growth in a rapidly evolving digital landscape.

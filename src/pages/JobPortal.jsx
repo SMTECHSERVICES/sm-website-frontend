@@ -1,8 +1,8 @@
-// src/pages/JobPortalLogin.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // adjust path as per your folder
-import Navbar from "../components/layout/Navbar";
+// // src/pages/JobPortalLogin.jsx
+ import { useState } from "react";
+ import { useNavigate } from "react-router-dom";
+ import { useAuth } from "../context/AuthContext"; // adjust path as per your folder
+ import Navbar from "../components/layout/Navbar";
 
 // const JobPortalLogin = () => {
 //   const navigate = useNavigate();
@@ -337,11 +337,16 @@ import Navbar from "../components/layout/Navbar";
 // };
 
 // export default JobPortalLogin;
+
 import React from 'react';
 import Footer from "../components/layout/Footer";
+import LoginCommonLayout from "../components/layout/LoginCommonLayout";
+import hero1 from '/hero1.jpg'
+
 
 const JobPortal = () => {
   // Sample job data
+  const navigate = useNavigate();
   const jobOpenings = [
     {
       id: 1,
@@ -389,18 +394,26 @@ const JobPortal = () => {
     },
   ];
 
+  const handleClick = ()=>{
+    navigate('/job-portal-Login')
+  }
+
+  const heading = ' Connecting Talent with Opportunity';
+
+  const paragraph = 'For Employers and Job Seekers | One Platform. Limitless Careers.'
   return (
     <>
     <Navbar/>
+     <LoginCommonLayout login1={'Job-Seeker'} login2={'Employer'} heading={heading} paragraph={paragraph} to1={'/candidate/auth'} to2={'/employer/auth'} hero={hero1} />
     <div className="min-h-screen bg-gray-50">
         {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
          <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-indigo-600">JobConnect</h1>
+          <h1 className="text-3xl font-bold text-black">Latest Job Openings</h1>
           <div className="flex space-x-4">
-            <button className="px-4 py-2 text-gray-600 hover:text-indigo-600">For Job Seekers</button>
-            <button className="px-4 py-2 text-gray-600 hover:text-indigo-600">For Employers</button>
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Post a Job</button>
+            <button onClick={handleClick} className="px-4 py-2 bg-green-500 text-white rounded-md cursor-pointer hover:bg-green-700">For Job Seekers</button>
+            <button onClick={handleClick} className="px-4 py-2 bg-indigo-600 text-white rounded-md cursor-pointer hover:bg-indigo-700">For Employers</button>
+            {/* <button className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Post a Job</button> */}
           </div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -435,7 +448,7 @@ const JobPortal = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800">Latest Job Openings</h2>
+          {/* <h2 className="text-2xl font-semibold text-gray-800">Latest Job Openings</h2> */}
           <div className="flex items-center space-x-2">
             <span className="text-sm text-gray-600">Sort by:</span>
             <select className="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
