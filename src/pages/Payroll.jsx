@@ -102,12 +102,13 @@ const Payroll = () => {
         </section>
 
         {/* Footer */}
-        <footer className="text-center py-6 text-gray-600 text-sm">
-          <Footer />
-        </footer>
+    
+         
+        
       </div>
     </div>
     </div>
+     <Footer />
     </>
   )
 }
