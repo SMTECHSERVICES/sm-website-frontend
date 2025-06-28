@@ -4,6 +4,10 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from './routes/PrivateRoute';
 import './App.css'
 import Unauthorized from './pages/auth/Unauthorized';
+
+const PrivacyPage = lazy(()=>import('./pages/footer/Privacy.jsx'))
+const TermsAndConditionPage = lazy(()=>import('./pages/footer/TermAndCondition.jsx'))
+const RefundPolicyPage = lazy(()=>import('./pages/footer/RefundPolicy.jsx'))
 const HomePage = lazy(()=>import('./pages/Home'));
 const AboutPage = lazy(()=>import('./pages/About'));
 const ContactPage = lazy(()=>import('./pages/Contact'));
@@ -58,6 +62,9 @@ function App() {
  
    <Routes>
     <Route path='/' element={<HomePage />} />
+     <Route path='/privacy' element={<PrivacyPage />} />
+      <Route path='/terms' element={<TermsAndConditionPage />} />
+       <Route path='/refund' element={<RefundPolicyPage />} />
     <Route path='/unauthorized' element={<Unauthorized />} />
     <Route path='/about' element={<AboutPage />} />
     <Route path='/services' element={<ServicesPage />} />
