@@ -417,7 +417,7 @@ const SoftwareDev = () => {
           {/* Technologies Used Section */}
           <section className="mb-12 bg-white rounded-xl shadow-lg p-6 sm:p-8 lg:p-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-800 mb-8">Technologies We Master</h2>
-            <div className='grid grid-cols-3 overflow-hidden gap-2.5'>
+            <div className='grid grid-cols-1 md:grid-cols-3 overflow-hidden gap-2.5'>
    {techCardData.map((techCard,index)=>{
               return <TechCard key={index} heading={techCard.heading} techList={techCard.techList} />
 

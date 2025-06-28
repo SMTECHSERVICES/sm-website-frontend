@@ -109,32 +109,7 @@ const JobSeekerAuthPage = () => {
     navigate("/candidate/dashboard");
   };
 
-  // const handleRegister = (e) => {
-  //   e.preventDefault();
-  //   if (!hasPaid) return alert("Please complete payment first.");
-  //   if (registerData.password !== registerData.confirmPassword) {
-  //     return alert("Passwords do not match!");
-  //   }
-
-  //   const formData = new FormData();
-  //   for (const key in registerData) {
-  //     formData.append(key, registerData[key]);
-  //   }
-
-  //   const userData = {
-  //     isAuthenticated: true,
-  //     user: {
-  //       name: registerData.fullName,
-  //       email: registerData.email,
-  //       role: "candidate",
-  //     },
-  //     token: "jobseeker-register-token",
-  //   };
-
-  //   login(userData);
-  //   alert("Registration successful!");
-  //   navigate("/candidate/dashboard");
-  // };
+  
 
 const handleRegister = async (e) => {
   e.preventDefault();
@@ -593,3 +568,7 @@ const handleRegister = async (e) => {
 };
 
 export default JobSeekerAuthPage;
+
+
+
+
