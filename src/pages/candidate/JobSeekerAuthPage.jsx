@@ -12,7 +12,7 @@ const JobSeekerAuthPage = () => {
   const { login } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [hasPaid, setHasPaid] = useState(false);
-  const portalFeeAmount = 1; // INR
+  const portalFeeAmount = 1180; // INR
 
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [showLoginPassword, setShowLoginPassword] = useState(false);
